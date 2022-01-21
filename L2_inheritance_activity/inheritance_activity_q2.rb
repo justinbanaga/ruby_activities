@@ -1,4 +1,4 @@
-module AdminPermissions
+module AdminPermission
  def edit_users_profile
   puts "Admin updated all users profile"
  end
@@ -13,9 +13,17 @@ end
  
 class User
  def initialize(username, password, ip_address)
+      @username = username
+      @password = password
+      @ip_address = ip_address
 
+      self.login
  end
 
+ def change_password
+  "Password changed!"
+ end
+ 
  protected
  def login
    puts "User logged in. IP address: #@{ip_address}"
@@ -23,9 +31,12 @@ class User
 end
 
 class Admin < User
+ include AdminPermission
+
 end
 
 class Buyer < User
+ include BuyerPermission
 end
 
 ## execute
